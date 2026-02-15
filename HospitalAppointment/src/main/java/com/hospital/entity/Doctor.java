@@ -25,12 +25,6 @@ public class Doctor {
     private String doctorName;
     private String specialization;
 
-//    @ElementCollection(fetch = FetchType.EAGER)
-//    @CollectionTable(
-//            name = "doctor_available_days",
-//            joinColumns = @JoinColumn(name = "doctor_id")
-//    )
-//    @Column(name = "available_day")
     private List<String> availability;
 
     @ManyToOne
