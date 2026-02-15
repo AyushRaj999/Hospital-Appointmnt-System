@@ -91,11 +91,15 @@ public class DoctorDAO {
 
     // Fetch Doctors By Available Days
     public List<Doctor> getDoctorsByAvailableDays(String availability){
-        List<Doctor> doctors = doctorRepository.findByAvailabilityContainingIgnoreCase(availability);
-        if (doctors.isEmpty()){
-            throw new NoRecordAvailableException("No Doctor Available on " + availability);
-        }
-        return doctors;
+        List<Doctor> doctors =  doctorRepository.findAll()
+                .stream()
+                .filter(d -> d.getAvailability() != null &&
+                        d.getAvailability().contains(availability))
+                .toList();
+        if(!doctors.isEmpty())
+            return doctors;
+        else
+            throw new NoRecordAvailableException("No Doctor is Available on this day");
     }
 
 
@@ -111,12 +115,10 @@ public class DoctorDAO {
 
     // Delete Doctor
     public void deleteDoctor(Long id){
-        Optional<Doctor> optional = doctorRepository.findById(id);
-        if (optional.isPresent()){
-            doctorRepository.delete(optional.get());
-        }
-        else {
-            throw new IdNotFoundException("Given Id is not found for delete");
-        }
+            Doctor doctor = doctorRepository.findById(id)
+                    .orElseThrow(()->new IdNotFoundException("ID not found in databse"));
+
+            doctorRepository.delete(doctor);
+
     }
 }

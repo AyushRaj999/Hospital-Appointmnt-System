@@ -43,8 +43,8 @@ public class DoctorController {
     }
 
     @GetMapping("/patient/{patient}")
-    public ResponseEntity<ResponseStructure<List<Doctor>>> getDoctorByPatientName(@PathVariable String patientName){
-        return doctorService.getAllDoctorByPatient(patientName);
+    public ResponseEntity<ResponseStructure<List<Doctor>>> getDoctorByPatientName(@PathVariable String patient){
+        return doctorService.getAllDoctorByPatient(patient);
     }
 
     @GetMapping("/appointment/{appointment}")
@@ -60,5 +60,10 @@ public class DoctorController {
     @PutMapping("/{id}")
     public ResponseEntity<ResponseStructure<Doctor>> updateDoctor(@RequestBody Doctor doctor,@PathVariable Long id){
         return doctorService.updateDoctors(doctor, id);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ResponseStructure<Doctor>> deleteDoctor(@PathVariable Long id){
+        return doctorService.deleteDoctor(id);
     }
 }

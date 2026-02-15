@@ -34,6 +34,9 @@ public class DepartmentDAO{
 
     //Fetch All Department By Id
     public Department getDepartmentById(Long id){
+        if(id==null){
+            throw new IdNotFoundException("Id can not be null, please enter valid id ");
+        }
         Optional<Department> optional = departmentRepository.findById(id);
         if(optional.isPresent()){
             return optional.get();

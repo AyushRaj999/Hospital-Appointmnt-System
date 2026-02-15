@@ -27,7 +27,6 @@ public class AppointmentDAO {
 
         Long patientId = appointment.getPatient().getPatientId();
         LocalDate date = appointment.getAppointmentDateTime().toLocalDate();
-
         // Patient same day check
         if(repository.existsPatientAppointmentOnDate(patientId, date)){
             throw new SlotNotAvailableException(

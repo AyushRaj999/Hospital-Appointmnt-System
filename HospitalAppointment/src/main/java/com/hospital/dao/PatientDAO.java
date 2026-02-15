@@ -37,6 +37,9 @@ public class PatientDAO {
     }
     // Fetch Patient By id
     public Patient getPatientById(Long id){
+        if(id==null){
+            throw new IdNotFoundException("Id can not be null, please enter valid id ");
+        }
         Optional<Patient> optional = patientRepository.findById(id);
         if(optional.isPresent()){
             return optional.get();

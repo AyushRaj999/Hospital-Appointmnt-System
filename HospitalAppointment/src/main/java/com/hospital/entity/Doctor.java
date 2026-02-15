@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,12 +25,12 @@ public class Doctor {
     private String doctorName;
     private String specialization;
 
-    @ElementCollection
-    @CollectionTable(
-            name = "doctor_available_days",
-            joinColumns = @JoinColumn(name = "doctor_id")
-    )
-    @Column(name = "available_day")
+//    @ElementCollection(fetch = FetchType.EAGER)
+//    @CollectionTable(
+//            name = "doctor_available_days",
+//            joinColumns = @JoinColumn(name = "doctor_id")
+//    )
+//    @Column(name = "available_day")
     private List<String> availability;
 
     @ManyToOne
