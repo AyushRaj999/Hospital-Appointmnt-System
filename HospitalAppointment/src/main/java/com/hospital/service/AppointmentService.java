@@ -18,7 +18,7 @@ public class AppointmentService {
     @Autowired
     private AppointmentDAO appointmentDAO;
 
-    // Book Appointment
+    // Book Patient Appointment
     public ResponseEntity<ResponseStructure<Appointment>> bookAppointment(Appointment appointment){
 
         ResponseStructure<Appointment> response = new ResponseStructure<>();
@@ -26,6 +26,18 @@ public class AppointmentService {
         response.setStatusCode(HttpStatus.CREATED.value());
         response.setMessage("Appointment Booked Successfully");
         response.setData(appointmentDAO.saveAppointment(appointment));
+
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+    // Book Doctor Appointment
+    public ResponseEntity<ResponseStructure<Appointment>> bookDoctorAppointment(Appointment appointment){
+
+        ResponseStructure<Appointment> response = new ResponseStructure<>();
+
+        response.setStatusCode(HttpStatus.CREATED.value());
+        response.setMessage("Appointment Booked Successfully");
+        response.setData(appointmentDAO.saveDoctorAppointment(appointment));
 
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }

@@ -21,10 +21,6 @@ public interface AppointmentRepository
 
     List<Appointment> findByStatus(Status status);
 
-    boolean existsByDoctorDoctorIdAndAppointmentDateTime(Long doctorId, LocalDateTime dateTime);
-
-    boolean existsByPatientPatientIdAndAppointmentDateTime(Long patientId, LocalDateTime dateTime);
-
     @Query(value = """
         SELECT COUNT(*) > 0
         FROM appointments a
@@ -32,5 +28,13 @@ public interface AppointmentRepository
         AND DATE(a.appointment_date_time) = :date
         """, nativeQuery = true)
     boolean existsPatientAppointmentOnDate(Long patientId, LocalDate date);
+
+    @Query(value = """
+        SELECT COUNT(*) > 0
+        FROM appointments a
+        WHERE a.patient_id = :patientId
+        AND DATE(a.appointment_date_time) = :date
+        """, nativeQuery = true)
+    boolean existsDoctorAppointmentOnDate(Long doctorId, LocalDate date);
 }
 
