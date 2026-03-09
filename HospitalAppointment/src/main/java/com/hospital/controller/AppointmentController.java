@@ -25,6 +25,13 @@ public class AppointmentController {
         return appointmentService.bookAppointment(appointment);
     }
 
+    // Book Appointment
+    @PostMapping("/doctor")
+    public ResponseEntity<ResponseStructure<Appointment>> bookDoctorAppointment(@RequestBody Appointment appointment){
+
+        return appointmentService.bookDoctorAppointment(appointment);
+    }
+
     // Fetch All Appointments
     @GetMapping
     public ResponseEntity<ResponseStructure<List<Appointment>>> getAllAppointments(){

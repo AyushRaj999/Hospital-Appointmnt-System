@@ -29,12 +29,16 @@ public interface AppointmentRepository
         """, nativeQuery = true)
     boolean existsPatientAppointmentOnDate(Long patientId, LocalDate date);
 
-    @Query(value = """
-        SELECT COUNT(*) > 0
-        FROM appointments a
-        WHERE a.doctor_id = :doctorId
-        AND DATE(a.appointment_date_time) = :date
-        """, nativeQuery = true)
-    boolean existsDoctorAppointmentOnDate(Long doctorId, LocalDate date);
+//    @Query(value = """
+//        SELECT COUNT(*) > 0
+//        FROM appointments a
+//        WHERE a.doctor_id = :doctorId
+//        AND DATE(a.appointment_date_time) = :date
+//        """, nativeQuery = true)
+//    boolean existsDoctorAppointmentOnDate(Long doctorId, LocalDateTime date);
+
+    boolean existsByDoctorDoctorIdAndAppointmentDateTime(
+            Long doctorId,
+            LocalDateTime appointmentDateTime);
 }
 

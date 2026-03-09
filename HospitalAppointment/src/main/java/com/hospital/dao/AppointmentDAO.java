@@ -22,7 +22,7 @@ public class AppointmentDAO {
     @Autowired
     private AppointmentRepository repository;
 
-    // Save
+    //Patient Appointment Save
     public Appointment saveAppointment(Appointment appointment){
 
         Long patientId = appointment.getPatient().getPatientId();
@@ -36,13 +36,13 @@ public class AppointmentDAO {
         return repository.save(appointment);
     }
 
-    // Save
+    //Doctor Appointment Save
     public Appointment saveDoctorAppointment(Appointment appointment){
 
         Long doctorId = appointment.getDoctor().getDoctorId();
-        LocalDate date = appointment.getAppointmentDateTime().toLocalDate();
-        // Doctor same day check
-        if(repository.existsDoctorAppointmentOnDate(doctorId, date)){
+        LocalDateTime time = appointment.getAppointmentDateTime();
+        // Doctor same time check
+        if(repository.existsByDoctorDoctorIdAndAppointmentDateTime(doctorId, time)){
             throw new SlotNotAvailableException(
                     "Doctor already has appointment on this day");
         }
