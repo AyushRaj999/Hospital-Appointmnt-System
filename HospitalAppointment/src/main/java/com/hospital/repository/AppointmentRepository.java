@@ -32,7 +32,7 @@ public interface AppointmentRepository
     @Query(value = """
         SELECT COUNT(*) > 0
         FROM appointments a
-        WHERE a.patient_id = :patientId
+        WHERE a.doctor_id = :doctorId
         AND DATE(a.appointment_date_time) = :date
         """, nativeQuery = true)
     boolean existsDoctorAppointmentOnDate(Long doctorId, LocalDate date);
